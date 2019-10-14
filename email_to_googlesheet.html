@@ -1,0 +1,66 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script>
+        function postToGoogle() {
+        var fullname=$('#fullname').val();
+        var email=$('#email').val();
+        var message=$('#message').val();
+        if((!fullname) || (!email) || (!message)){
+            $('#error').text("Please fill out all fields!");
+        }else{
+            $.ajax({
+                url:"",data:{"entry_":fullname,"entry_":email,"entry_":message},type:"POST",dataType:"xml",statusCode: {0:function() { window.location.replace("thankyou.html");},200:function(){window.location.replace("thankyou.html");}}
+            });
+        }
+
+        }
+    </script>
+    <style>
+        *{ font-size: 20px; background-color: #eee}
+        #gForm{
+            width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            font-family: consolas;
+            color: teal;           
+            background-color: white;
+        }
+        #gForm input, #gForm textarea{
+            margin-bottom: 30px;
+            width: 100%;
+            padding: 12px;
+            border: none;           
+            font-family: consolas; 
+            background-color: white;          
+            border-bottom: 1px solid silver;
+        }
+        #gForm textarea{ border: 1px solid silver; margin-top: 30px}
+        #gForm input[type="button"], #gForm input[type="reset"]{
+            background: tomato;
+            color:white;
+            border: none;
+            padding: 8px 20px;
+            width: 120px;
+            border-radius: 2px;
+        }
+        ::placeholder{ color: #555}
+        #gForm > #error{ color: red }
+        #gForm p{ padding: 0px 10px }
+    </style>
+</head>
+<body>
+
+    <form id="gForm">
+        <p>Form values send to Google Excel Sheet</p>
+        <p id="error"></p>
+        <input type="text" name="fullname" id="fullname" placeholder="Full name" minlength="4" maxlength="30"/><br/>
+        <input type="email" name="email" id="email" placeholder="Your email" /><br/>
+        <textarea name="message" id="message" form="formRequest" rows="4" cols="40" placeholder="Your message here..."></textarea><br/><br/>
+        <input type="button" name="Submit" id="Submit" onclick="postToGoogle()" value="SUBMIT"/>
+        <input type="reset" value="RESET"/>
+    </form>
+
+</body>
+</html>
